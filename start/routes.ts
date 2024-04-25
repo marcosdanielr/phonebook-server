@@ -7,6 +7,7 @@
 |
 */
 
+const UsersController = () => import('#controllers/users_controller')
 import router from '@adonisjs/core/services/router'
 
-router.get('/', async () => 'It works!')
+router.get('users', [UsersController, 'list'])
