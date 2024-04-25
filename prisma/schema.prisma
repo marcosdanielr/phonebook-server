@@ -13,7 +13,28 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum Role {
+  ADMIN
+  USER
+}
+
 model User {
-  id   Int    @id @default(autoincrement())
-  name String @db.VarChar(240)
+  id            Int    @id @default(autoincrement())
+  name          String @db.VarChar(240)
+  email         String @db.VarChar(254)
+  role          Role   @default(USER)
+  password_hash String @db.VarChar(240)
+
+  user_phone_number UserPhoneNumber?
+
+  @@map("users")
+}
+
+model UserPhoneNumber {
+  id     Int    @id @default(autoincrement())
+  number String @db.VarChar(11)
+
+  user User @relation(fields: [user_id], references: [id])
+
+  user_id Int @unique
 }
