@@ -45,11 +45,13 @@
     "hot-hook": "^0.2.1",
     "pino-pretty": "^11.0.0",
     "prettier": "^3.2.5",
+    "prisma": "^5.13.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.4.5"
   },
   "dependencies": {
     "@adonisjs/core": "^6.8.0",
+    "@prisma/client": "^5.13.0",
     "reflect-metadata": "^0.2.2"
   },
   "hotHook": {
