@@ -34,7 +34,7 @@ test.group('Create User Phone Number Use Case', (group) => {
     }
   })
 
-  test('should be possible create phone number', async ({ assert }) => {
+  test('should be able create phone number', async ({ assert }) => {
     const phoneNumber = '11111111111'
 
     await sut!.execute({ phoneNumber, userId: user!.id })
@@ -45,7 +45,7 @@ test.group('Create User Phone Number Use Case', (group) => {
     assert.equal(userPhoneNumber!.id, 1)
   })
 
-  test("shouldn't be possible create phone number if exists", async ({ assert }) => {
+  test("shouldn't be able create phone number if exists", async ({ assert }) => {
     const phoneNumber = '11111111111'
 
     await sut!.execute({ phoneNumber, userId: user!.id })

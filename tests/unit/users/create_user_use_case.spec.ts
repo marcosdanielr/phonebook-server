@@ -4,7 +4,7 @@ import { CreateUserUseCase } from '#use_cases/users/create_use_use_case'
 import { Prisma } from '@prisma/client'
 import hash from '@adonisjs/core/services/hash'
 
-test('create user', async ({ assert }) => {
+test('should be able create user', async ({ assert }) => {
   const usersRepository = new InMemoryUsersRepository()
   const sut = new CreateUserUseCase(usersRepository)
 
