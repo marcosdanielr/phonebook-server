@@ -59,6 +59,7 @@
     "@adonisjs/core": "^6.8.0",
     "@prisma/client": "^5.13.0",
     "@vinejs/vine": "^2.0.0",
+    "bcrypt": "^5.1.1",
     "reflect-metadata": "^0.2.2"
   },
   "hotHook": {

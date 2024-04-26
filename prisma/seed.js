@@ -23,8 +23,7 @@ async function main() {
     const user = {
       name: generateRandomString(8),
       email: generateRandomEmail(),
-      password_hash:
-        '$scrypt$n=16384,r=8,p=1$uyNr6aucmaQmF0ijc8Iq4Q$oFwk9W8cdkfRLmPFljP/xtubuU2QfSXeDfKn+UkixRWnd39xM91BUJ++zg0fLXlkNqksNpuRXSwK6J2gBwHtjQ',
+      password_hash: '$bcrypt$v=98$r=10$uyJ9uessj6iOa84jw325pQ$oUGob15jVdCZhT8djf70c0u4wCOiyS4',
     }
     users.push(user)
   }
@@ -36,8 +35,7 @@ async function main() {
       name: 'Marcos',
       email: 'marcosadm@email.com',
       role: 'ADMIN',
-      password_hash:
-        '$scrypt$n=16384,r=8,p=1$uyNr6aucmaQmF0ijc8Iq4Q$oFwk9W8cdkfRLmPFljP/xtubuU2QfSXeDfKn+UkixRWnd39xM91BUJ++zg0fLXlkNqksNpuRXSwK6J2gBwHtjQ',
+      password_hash: '$bcrypt$v=98$r=10$uyJ9uessj6iOa84jw325pQ$oUGob15jVdCZhT8djf70c0u4wCOiyS4',
     },
   })
 
