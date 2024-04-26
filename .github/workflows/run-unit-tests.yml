@@ -17,4 +17,7 @@ jobs:
 
       - run: npm ci
 
+      - name: Copy .env.example to .env
+        run: cp .env.example .env
+      
       - run: npm run test
