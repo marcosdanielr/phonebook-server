@@ -1,6 +1,5 @@
 import { Prisma, User } from '@prisma/client'
 import { UsersRepository } from '#repositories/users_repository'
-import hash from '@adonisjs/core/services/hash'
 
 export class InMemoryUsersRepository implements UsersRepository {
   private users: User[] = []
@@ -17,7 +16,7 @@ export class InMemoryUsersRepository implements UsersRepository {
       name,
       email,
       role: 'USER',
-      password_hash: await hash.make(passwordHash),
+      password_hash: passwordHash,
     })
   }
 

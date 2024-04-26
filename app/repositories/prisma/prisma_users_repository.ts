@@ -1,6 +1,5 @@
 import { prisma } from '#lib/prisma'
 import { UsersRepository } from '#repositories/users_repository'
-import hash from '@adonisjs/core/services/hash'
 import { Prisma } from '@prisma/client'
 
 export class PrismaUserRepository implements UsersRepository {
@@ -21,7 +20,7 @@ export class PrismaUserRepository implements UsersRepository {
         email,
         name,
         role: 'USER',
-        password_hash: await hash.make(passwordHash),
+        password_hash: passwordHash,
       },
     })
   }
