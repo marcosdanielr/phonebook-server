@@ -26,4 +26,8 @@ export class InMemoryUserPhoneNumbersRepository implements UserPhoneNumbersRepos
 
     return userPhoneNumber
   }
+
+  async listByUserId(userId: number) {
+    return this.userPhoneNumbers.filter((item) => item.user_id === userId)
+  }
 }
