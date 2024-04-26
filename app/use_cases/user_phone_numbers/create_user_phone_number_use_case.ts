@@ -8,7 +8,7 @@ interface CreateUserPhoneNumberRequest {
   phoneNumber: string
 }
 
-export class CreateUserPhoneNumber {
+export class CreateUserPhoneNumberUseCase {
   constructor(
     private userPhoneNumbersRepository: UserPhoneNumbersRepository,
     private usersRepository: UsersRepository
