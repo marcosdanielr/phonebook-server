@@ -10,4 +10,14 @@ export class PrismaUserPhoneNumbersRepository implements UserPhoneNumbersReposit
       },
     })
   }
+
+  async findByNumber(phoneNumber: string) {
+    const userPhoneNumber = await prisma.userPhoneNumber.findUnique({
+      where: {
+        number: phoneNumber,
+      },
+    })
+
+    return userPhoneNumber
+  }
 }
