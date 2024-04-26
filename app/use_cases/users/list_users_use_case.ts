@@ -1,11 +1,11 @@
-import { UsersRepository } from '../../repositories/users_repository.js'
+import { UsersRepository } from '#repositories/users_repository'
 import { User } from '@prisma/client'
 
-interface ListUsersRequestCaseRequest {
+export interface ListUsersRequestCaseRequest {
   page: number
 }
 
-interface ListUsersResponseCaseResponse {
+export interface ListUsersResponseCaseResponse {
   users: User[]
 }
 

@@ -3,5 +3,11 @@
   "compilerOptions": {
     "rootDir": "./",
     "outDir": "./build",
-  },
+    "baseUrl": "./app",
+    "paths": {
+      "#use_cases/*": ["use_cases/*.ts"],
+      "#lib/*": ["lib/*.ts"],
+      "#repositories/*": ["repositories/*.ts"]
+    }
+  }
 }

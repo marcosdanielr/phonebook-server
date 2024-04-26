@@ -1,5 +1,5 @@
-import { prisma } from '../../lib/prisma.js'
-import { UsersRepository } from '../users_repository.js'
+import { prisma } from '#lib/prisma'
+import { UsersRepository } from '#repositories/users_repository'
 
 export class PrismaUserRepository implements UsersRepository {
   async list(page: number) {
