@@ -1,5 +1,6 @@
 import { prisma } from '#lib/prisma'
 import { UserPhoneNumbersRepository } from '#repositories/user_phone_numbers_repository'
+import { Prisma } from '@prisma/client'
 
 export class PrismaUserPhoneNumbersRepository implements UserPhoneNumbersRepository {
   async create(userId: number, phoneNumber: string) {
@@ -36,6 +37,15 @@ export class PrismaUserPhoneNumbersRepository implements UserPhoneNumbersReposit
       where: {
         id,
       },
+    })
+  }
+
+  async update(id: number, data: Prisma.UserPhoneNumberUpdateInput) {
+    await prisma.userPhoneNumber.update({
+      where: {
+        id,
+      },
+      data,
     })
   }
 }

@@ -1,5 +1,5 @@
 import { UserPhoneNumbersRepository } from '#repositories/user_phone_numbers_repository'
-import { UserPhoneNumber } from '@prisma/client'
+import { Prisma, UserPhoneNumber } from '@prisma/client'
 
 export class InMemoryUserPhoneNumbersRepository implements UserPhoneNumbersRepository {
   private userPhoneNumbers: UserPhoneNumber[] = []
@@ -41,5 +41,18 @@ export class InMemoryUserPhoneNumbersRepository implements UserPhoneNumbersRepos
     }
 
     this.userPhoneNumbers.splice(index, 1)
+  }
+
+  async update(id: number, data: Prisma.UserPhoneNumberUpdateInput) {
+    const index = this.userPhoneNumbers.findIndex((item) => item.id === id)
+
+    if (index < 0) {
+      return
+    }
+
+    this.userPhoneNumbers[index] = {
+      ...this.userPhoneNumbers[index],
+      number: (data.number as string) || this.userPhoneNumbers[index].number,
+    }
   }
 }
