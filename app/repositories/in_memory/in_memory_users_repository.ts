@@ -62,9 +62,19 @@ export class InMemoryUsersRepository implements UsersRepository {
       return
     }
 
+    const { id: userId, name, email, password_hash: passwordHash, role } = this.users[index]
+
+    const updateData: User = {
+      id: userId,
+      name: (data.name as string) || name,
+      email: (data.email as string) || email,
+      password_hash: (data.password_hash as string) || passwordHash,
+      role,
+    }
+
     this.users[index] = {
-      ...data,
       ...this.users[index],
+      ...updateData,
     }
   }
 }
