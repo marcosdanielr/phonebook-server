@@ -27,7 +27,11 @@ test.group('Authenticate User Use Case', (group) => {
   test('should be able authenticate', async ({ assert }) => {
     const { user } = await sut.execute({ email: 'marcos@test.com', password: '123456789' })
 
-    assert.include(user, { id: 1 })
+    assert.include(user, {
+      id: 1,
+      name: 'Marcos',
+      email: 'marcos@test.com',
+    })
   })
 
   test("shouldn't be able authenticate with invalid email", async ({ assert }) => {
