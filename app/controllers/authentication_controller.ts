@@ -3,6 +3,7 @@ import { makeAuthenticateUserUseCase } from '#use_cases/factories/make_authentic
 import TokenService from '#services/token_service'
 import { inject } from '@adonisjs/core'
 import { InvalidCredentialsError } from '#use_cases/errors/invalid_credentials_error'
+import { authenticateValidator } from '#validators/authentication_validator'
 
 interface AuthenticationResponse {
   access_token: string
@@ -17,21 +18,23 @@ export default class AuthenticationController {
     response,
   }: HttpContext): Promise<AuthenticationResponse | unknown> {
     try {
-      const { email, password } = request.body()
+      const payload = await authenticateValidator.validate(request.body())
+
+      const { email, password } = payload
       const authenticateUserUseCase = makeAuthenticateUserUseCase()
 
       const { user } = await authenticateUserUseCase.execute({ email, password })
 
       const { id: sub, name, email: userEmail, role } = user
 
-      const payload = {
+      const userPayload = {
         sub,
         name,
         email: userEmail,
         role,
       }
 
-      const accessToken = this.tokenService.generateToken(payload)
+      const accessToken = this.tokenService.generateToken(userPayload)
 
       return {
         access_token: accessToken,
@@ -41,7 +44,11 @@ export default class AuthenticationController {
         response.unauthorized({
           message: 'invalid credentials.',
         })
+
+        return
       }
+
+      response.badRequest(error)
     }
   }
 }
