@@ -7,7 +7,7 @@ export class InMemoryUserPhoneNumbersRepository implements UserPhoneNumbersRepos
   async create(userId: number, phoneNumber: string) {
     let userPhoneId = 1
     if (this.userPhoneNumbers.length > 0) {
-      userId = this.userPhoneNumbers[this.userPhoneNumbers.length - 1].id + 1
+      userPhoneId = this.userPhoneNumbers[this.userPhoneNumbers.length - 1].id + 1
     }
 
     const userPhoneNumber = {
