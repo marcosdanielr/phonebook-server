@@ -52,4 +52,13 @@ export class PrismaUserRepository implements UsersRepository {
       },
     })
   }
+
+  async update(id: number, data: Prisma.UserUpdateInput) {
+    await prisma.user.update({
+      where: {
+        id,
+      },
+      data,
+    })
+  }
 }
