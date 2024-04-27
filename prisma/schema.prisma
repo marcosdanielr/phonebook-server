@@ -37,4 +37,6 @@ model UserPhoneNumber {
   user User @relation(fields: [user_id], references: [id])
 
   user_id Int @unique
+
+  @@map("user_phone_numbers")
 }
