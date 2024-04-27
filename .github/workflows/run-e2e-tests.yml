@@ -27,15 +27,7 @@ jobs:
 
       - run: npm ci
 
-      - run: npm run test:e2e
+      - name: Copy .env.example to .env
+        run: cp .env.example .env
 
-        env:
-          TZ: UTC
-          PORT: 3333
-          HOST: localhost
-          LOG_LEVEL: info
-          APP_KEY: zKXHe-Ahdb7aPK1ylAJlRgTefktEaACi
-          NODE_ENV: development
-          DATABASE_URL: ""
-          JWT_SECRET: testing
-          DATABASE_URL: 'postgresql://docker:docker@localhost:5432/telephone-directory-db?schema=public'
+      - run: npm run test:e2e
