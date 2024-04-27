@@ -11,8 +11,13 @@ export class InMemoryUsersRepository implements UsersRepository {
   async create(data: Prisma.UserCreateInput) {
     const { name, email, password_hash: passwordHash } = data
 
+    let userId = 1
+    if (this.users.length > 0) {
+      userId = this.users[this.users.length - 1].id + 1
+    }
+
     this.users.push({
-      id: this.users.length > 0 ? this.users[this.users.length].id + 1 : 1,
+      id: userId,
       name,
       email,
       role: 'USER',
