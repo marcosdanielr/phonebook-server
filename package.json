@@ -8,7 +8,8 @@
     "start": "node bin/server.js",
     "build": "node ace build",
     "dev": "node ace serve --watch",
-    "test": "node ace test",
+    "test": "node ace test unit",
+    "test:e2e": "node ace test functional",
     "lint": "eslint .",
     "format": "prettier --write .",
     "typecheck": "tsc --noEmit"
@@ -42,6 +43,7 @@
     "@adonisjs/eslint-config": "^1.3.0",
     "@adonisjs/prettier-config": "^1.3.0",
     "@adonisjs/tsconfig": "^1.3.0",
+    "@japa/api-client": "^2.0.3",
     "@japa/assert": "^3.0.0",
     "@japa/plugin-adonisjs": "^3.0.1",
     "@japa/runner": "^3.1.4",
