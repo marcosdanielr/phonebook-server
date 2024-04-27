@@ -42,7 +42,7 @@ test.group('Authenticate User Use Case', (group) => {
     }
   })
 
-  test("shouldn't be possible authenticate with invalid password", async ({ assert }) => {
+  test("shouldn't be able authenticate with invalid password", async ({ assert }) => {
     try {
       await sut.execute({ email: 'marcos@test.com', password: '987654321' })
     } catch (error) {
