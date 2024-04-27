@@ -22,6 +22,16 @@ export class PrismaUserPhoneNumbersRepository implements UserPhoneNumbersReposit
     return userPhoneNumber
   }
 
+  async findById(id: number) {
+    const userPhoneNumber = await prisma.userPhoneNumber.findUnique({
+      where: {
+        id,
+      },
+    })
+
+    return userPhoneNumber
+  }
+
   async listByUserId(userId: number) {
     const userPhoneNumbers = await prisma.userPhoneNumber.findMany({
       where: {
