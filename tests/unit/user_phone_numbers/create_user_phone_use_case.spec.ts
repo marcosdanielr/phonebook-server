@@ -10,7 +10,7 @@ import { User } from '@prisma/client'
 let userPhoneNumbersRepository: InMemoryUserPhoneNumbersRepository
 let usersRepository: InMemoryUsersRepository
 let user: User | null
-let sut: CreateUserPhoneNumberUseCase | undefined
+let sut: CreateUserPhoneNumberUseCase
 
 test.group('Create User Phone Number Use Case', (group) => {
   group.each.setup(async () => {
@@ -28,7 +28,7 @@ test.group('Create User Phone Number Use Case', (group) => {
 
     return () => {
       usersRepository = undefined!
-      usersRepository = undefined!
+      userPhoneNumbersRepository = undefined!
       sut = undefined!
       user = undefined!
     }
@@ -37,7 +37,7 @@ test.group('Create User Phone Number Use Case', (group) => {
   test('should be able create phone number', async ({ assert }) => {
     const phoneNumber = '11111111111'
 
-    await sut!.execute({ phoneNumber, userId: user!.id })
+    await sut.execute({ phoneNumber, userId: user!.id })
 
     const userPhoneNumber = await userPhoneNumbersRepository.findByNumber(phoneNumber)
 
@@ -48,10 +48,10 @@ test.group('Create User Phone Number Use Case', (group) => {
   test("shouldn't be able create phone number if exists", async ({ assert }) => {
     const phoneNumber = '11111111111'
 
-    await sut!.execute({ phoneNumber, userId: user!.id })
+    await sut.execute({ phoneNumber, userId: user!.id })
 
     try {
-      await sut!.execute({ phoneNumber, userId: user!.id })
+      await sut.execute({ phoneNumber, userId: user!.id })
     } catch (error) {
       assert.instanceOf(error, PhoneNumberAlreadyExistsError)
     }
@@ -59,7 +59,7 @@ test.group('Create User Phone Number Use Case', (group) => {
 
   test("shouldn't be possible create phone number if user not exists", async ({ assert }) => {
     try {
-      await sut!.execute({ phoneNumber: '12345678910', userId: 18 })
+      await sut.execute({ phoneNumber: '12345678910', userId: 18 })
     } catch (error) {
       assert.instanceOf(error, UserNotFoundError)
     }
