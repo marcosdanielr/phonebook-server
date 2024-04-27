@@ -1,8 +1,6 @@
 import { InMemoryUserPhoneNumbersRepository } from '#repositories/in_memory/in_memory_user_phone_numbers_repository'
 import { InMemoryUsersRepository } from '#repositories/in_memory/in_memory_users_repository'
-import { PhoneNumberAlreadyExistsError } from '#use_cases/errors/phone_number_already_exists_error'
 import { UserNotFoundError } from '#use_cases/errors/user_not_found_error'
-import { CreateUserPhoneNumberUseCase } from '#use_cases/user_phone_numbers/create_user_phone_number_use_case'
 import { ListUserPhoneNumbersUseCase } from '#use_cases/user_phone_numbers/list_user_phone_numbers_use_case'
 import hash from '@adonisjs/core/services/hash'
 import { test } from '@japa/runner'
