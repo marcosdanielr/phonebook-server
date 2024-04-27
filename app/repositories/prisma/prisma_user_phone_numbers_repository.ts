@@ -30,4 +30,12 @@ export class PrismaUserPhoneNumbersRepository implements UserPhoneNumbersReposit
 
     return userPhoneNumbers
   }
+
+  async delete(id: number) {
+    await prisma.userPhoneNumber.delete({
+      where: {
+        id,
+      },
+    })
+  }
 }
