@@ -5,11 +5,13 @@ export class InMemoryUserPhoneNumbersRepository implements UserPhoneNumbersRepos
   private userPhoneNumbers: UserPhoneNumber[] = []
 
   async create(userId: number, phoneNumber: string) {
+    let userPhoneId = 1
+    if (this.userPhoneNumbers.length > 0) {
+      userId = this.userPhoneNumbers[this.userPhoneNumbers.length - 1].id + 1
+    }
+
     const userPhoneNumber = {
-      id:
-        this.userPhoneNumbers.length > 0
-          ? this.userPhoneNumbers[this.userPhoneNumbers.length - 1].id + 1
-          : 1,
+      id: userPhoneId,
       number: phoneNumber,
       user_id: userId,
     }
