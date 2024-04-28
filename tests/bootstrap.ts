@@ -6,6 +6,9 @@ import testUtils from '@adonisjs/core/services/test_utils'
 import { apiClient } from '@japa/api-client'
 
 import env from '#start/env'
+import { PrismaTestDBEnvironment } from './prisma_test_db_environment.js'
+
+const prismaTestDBEnvironment = new PrismaTestDBEnvironment()
 
 /**
  * This file is imported by the "bin/test.ts" entrypoint file
@@ -31,8 +34,8 @@ export const plugins: Config['plugins'] = [
  * The teardown functions are executer after all the tests
  */
 export const runnerHooks: Required<Pick<Config, 'setup' | 'teardown'>> = {
-  setup: [],
-  teardown: [],
+  setup: [async () => await prismaTestDBEnvironment.create()],
+  teardown: [async () => await prismaTestDBEnvironment.teardown()],
 }
 
 /**

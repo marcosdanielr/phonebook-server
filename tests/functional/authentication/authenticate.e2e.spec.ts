@@ -1,17 +1,6 @@
-import { PrismaTestDBEnvironment } from '#tests/prisma_test_db_environment'
 import { test } from '@japa/runner'
 
-const prismaTestDBEnvironment = new PrismaTestDBEnvironment()
-
-test.group('Authenticate (E2E)', (group) => {
-  group.each.setup(async () => {
-    await prismaTestDBEnvironment.create()
-
-    return async () => {
-      await prismaTestDBEnvironment.teardown()
-    }
-  })
-
+test.group('Authenticate (E2E)', () => {
   test('should be able to authenticate', async ({ client, assert }) => {
     const response = await client.post('/api/auth').json({
       email: 'marcosadm@email.com',
