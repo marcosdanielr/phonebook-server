@@ -2,6 +2,7 @@ import { PhoneNumberAlreadyExistsError } from '#use_cases/errors/phone_number_al
 import { PhoneNumberNotFoundError } from '#use_cases/errors/phone_number_not_found_error'
 import { UserNotFoundError } from '#use_cases/errors/user_not_found_error'
 import { makeCreateUserPhoneNumberUseCase } from '#use_cases/factories/make_create_user_phone_number_use_case'
+import { makeDeleteUserPhoneNumberUseCase } from '#use_cases/factories/make_delete_user_phone_number_use_case'
 import { makeDeleteUserUseCase } from '#use_cases/factories/make_delete_user_use_case'
 import { makeListUserPhoneNumbersUseCase } from '#use_cases/factories/make_list_user_phone_numbers_use_case'
 import { ListUserPhoneNumbersResponse } from '#use_cases/user_phone_numbers/list_user_phone_numbers_use_case'
@@ -84,12 +85,13 @@ export default class UserPhoneNumbersController {
 
       const { id } = payload
 
-      const deleteUserPhoneNumberUseCase = makeDeleteUserUseCase()
+      const deleteUserPhoneNumberUseCase = makeDeleteUserPhoneNumberUseCase()
 
       await deleteUserPhoneNumberUseCase.execute({
         id,
       })
     } catch (error) {
+      console.log(error)
       if (error instanceof PhoneNumberNotFoundError) {
         return response.notFound({
           message: error.message,
