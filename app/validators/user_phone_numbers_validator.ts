@@ -6,3 +6,9 @@ export const createUserPhoneNumberValidator = vine.compile(
     number: vine.string().fixedLength(11),
   })
 )
+
+export const updatePhoneNomberValidator = vine.compile(
+  vine.object({
+    number: vine.string().fixedLength(11).optional(),
+  })
+)

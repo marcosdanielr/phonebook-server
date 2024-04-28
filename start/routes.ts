@@ -29,3 +29,6 @@ router
 router
   .delete('/api/users/phone_numbers/:id', [UserPhoneNumbersController, 'delete'])
   .use(middleware.auth())
+router
+  .patch('/api/users/phone_numbers/:id', [UserPhoneNumbersController, 'update'])
+  .use(middleware.auth())

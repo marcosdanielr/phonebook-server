@@ -5,9 +5,13 @@ import { makeCreateUserPhoneNumberUseCase } from '#use_cases/factories/make_crea
 import { makeDeleteUserPhoneNumberUseCase } from '#use_cases/factories/make_delete_user_phone_number_use_case'
 import { makeDeleteUserUseCase } from '#use_cases/factories/make_delete_user_use_case'
 import { makeListUserPhoneNumbersUseCase } from '#use_cases/factories/make_list_user_phone_numbers_use_case'
+import { makeUpdateUserPhoneNumberUseCase } from '#use_cases/factories/make_update_user_phone_number_use_case'
 import { ListUserPhoneNumbersResponse } from '#use_cases/user_phone_numbers/list_user_phone_numbers_use_case'
 import { idValidator } from '#validators/id_validator'
-import { createUserPhoneNumberValidator } from '#validators/user_phone_numbers_validator'
+import {
+  createUserPhoneNumberValidator,
+  updatePhoneNomberValidator,
+} from '#validators/user_phone_numbers_validator'
 import type { HttpContext } from '@adonisjs/core/http'
 import { errors } from '@vinejs/vine'
 
@@ -90,6 +94,38 @@ export default class UserPhoneNumbersController {
       await deleteUserPhoneNumberUseCase.execute({
         id,
       })
+    } catch (error) {
+      if (error instanceof PhoneNumberNotFoundError) {
+        return response.notFound({
+          message: error.message,
+        })
+      }
+
+      if (error instanceof errors.E_VALIDATION_ERROR) {
+        return response.badRequest(error)
+      }
+
+      return response.internalServerError()
+    }
+  }
+
+  async update({ request, response }: HttpContext): Promise<void> {
+    try {
+      const paramsPayload = await idValidator.validate(request.params())
+      const bodyPayload = await updatePhoneNomberValidator.validate(request.body())
+      const { id } = paramsPayload
+      const { number } = bodyPayload
+
+      const updateUserPhoneNumberUseCase = makeUpdateUserPhoneNumberUseCase()
+
+      if (number && id) {
+        await updateUserPhoneNumberUseCase.execute({
+          id,
+          data: {
+            number,
+          },
+        })
+      }
     } catch (error) {
       if (error instanceof PhoneNumberNotFoundError) {
         return response.notFound({
