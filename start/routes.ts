@@ -16,4 +16,4 @@ router.post('api/auth', [AuthenticationController, 'authenticate'])
 
 router.get('api/users', [UsersController, 'list']).use(middleware.auth())
 router.post('api/users', [UsersController, 'create']).use(middleware.auth())
-router.delete('api/users/:id', [UsersController, 'create']).use(middleware.auth())
+router.delete('api/users/:id', [UsersController, 'delete']).use(middleware.auth())
