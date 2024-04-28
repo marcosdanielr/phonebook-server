@@ -5,6 +5,10 @@ import { inject } from '@adonisjs/core'
 import { InvalidCredentialsError } from '#use_cases/errors/invalid_credentials_error'
 import { authenticateValidator } from '#validators/authentication_validator'
 import { errors } from '@vinejs/vine'
+import { GetUserResponse } from '#use_cases/users/get_user_use_case'
+import jwt, { JwtPayload } from 'jsonwebtoken'
+import env from '#start/env'
+import { makeGetUserUseCase } from '#use_cases/factories/make_get_user_use_case'
 
 interface AuthenticationResponse {
   access_token: string
@@ -12,7 +16,7 @@ interface AuthenticationResponse {
 
 @inject()
 export default class AuthenticationController {
-  constructor(protected tokenService: TokenService) { }
+  constructor(protected tokenService: TokenService) {}
 
   async authenticate({
     request,
@@ -55,5 +59,21 @@ export default class AuthenticationController {
 
       response.internalServerError()
     }
+  }
+
+  async getAuthenticatedUser({ request }: HttpContext): Promise<GetUserResponse> {
+    const token = request.headers().authorization!
+    const tokenArray = token.split(' ')
+    const tokenJWT = tokenArray[1]
+
+    const payload = jwt.verify(tokenJWT, env.get('JWT_SECRET'))
+
+    const getUserUseCase = makeGetUserUseCase()
+
+    const user = await getUserUseCase.execute({
+      id: (payload as JwtPayload).id,
+    })
+
+    return user
   }
 }

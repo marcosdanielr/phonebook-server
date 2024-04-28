@@ -14,6 +14,9 @@ const UsersController = () => import('#controllers/users_controller')
 const UserPhoneNumbersController = () => import('#controllers/user_phone_numbers_controller')
 
 router.post('api/auth', [AuthenticationController, 'authenticate'])
+router
+  .get('api/auth/current_user', [AuthenticationController, 'getAuthenticatedUser'])
+  .use(middleware.auth())
 
 router.get('api/users', [UsersController, 'list']).use(middleware.auth())
 router.post('api/users', [UsersController, 'create']).use(middleware.auth())
