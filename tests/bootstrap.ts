@@ -43,9 +43,12 @@ export const runnerHooks: Required<Pick<Config, 'setup' | 'teardown'>> = {
  * Learn more - https://japa.dev/docs/test-suites#lifecycle-hooks
  */
 export const configureSuite: Config['configureSuite'] = (suite) => {
-  if (['functional', 'e2e'].includes(suite.name)) {
+  if (suite.name === 'functional') {
     suite.setup(async () => await prismaTestDBEnvironment.create())
     suite.teardown(async () => await prismaTestDBEnvironment.teardown())
+  }
+
+  if (['browser', 'functional', 'e2e'].includes(suite.name)) {
     return suite.setup(() => testUtils.httpServer().start())
   }
 }
