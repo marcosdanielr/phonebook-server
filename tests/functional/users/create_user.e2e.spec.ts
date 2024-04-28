@@ -14,7 +14,7 @@ test.group('Create User (E2E)', () => {
       .json({
         name: 'Testing',
         role: 'USER',
-        email: 'testing123@email.com',
+        email: `testing${Math.floor(Math.random() * 9999) + 1}@email.com`,
         password: '123456789',
       })
       .headers({
