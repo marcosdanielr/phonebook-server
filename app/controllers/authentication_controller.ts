@@ -4,6 +4,7 @@ import TokenService from '#services/token_service'
 import { inject } from '@adonisjs/core'
 import { InvalidCredentialsError } from '#use_cases/errors/invalid_credentials_error'
 import { authenticateValidator } from '#validators/authentication_validator'
+import { errors } from '@vinejs/vine'
 
 interface AuthenticationResponse {
   access_token: string
@@ -11,7 +12,7 @@ interface AuthenticationResponse {
 
 @inject()
 export default class AuthenticationController {
-  constructor(protected tokenService: TokenService) {}
+  constructor(protected tokenService: TokenService) { }
 
   async authenticate({
     request,
@@ -48,7 +49,11 @@ export default class AuthenticationController {
         return
       }
 
-      response.badRequest(error)
+      if (error instanceof errors.E_VALIDATION_ERROR) {
+        return response.badRequest(error)
+      }
+
+      response.internalServerError()
     }
   }
 }
