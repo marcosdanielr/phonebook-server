@@ -72,25 +72,53 @@ npm run dev
 ### Rotas
 
 #### POST: /api/auth
-- **Corpo da requisição:** `{ "email": "example@example.com", "password": "senha123" }`
-- **Descrição:** Rota de login. Não requer autenticação.
+- **Corpo da requisição:** 
+```json
+{ 
+  "email": "example@example.com", 
+  "password": "senha123" 
+}
+```
+- **Descrição:** Rota de login.
 
 #### GET: /api/users?page=1
 - **Descrição:** Lista todos os usuários cadastrados.
 
 #### POST: /api/users
-- **Corpo da requisição:** `{ "name": "Nome", "email": "example@example.com", "password": "senha123", "role": "USER" }`
-- **Descrição:** Cria um novo usuário administrador.
+- **Corpo da requisição:** 
+```json
+{ 
+  "name": "Nome", 
+  "email": "example@example.com", 
+  "password": "senha123", 
+  "role": "USER" 
+}
+```
+- **Descrição:** Cria um novo usuário.
 
 #### DELETE: /api/users/:id
 - **Descrição:** Exclui um usuário pelo ID.
 
 #### PATCH: /api/users/:id
-- **Corpo da requisição:** `{ "name": "Novo Nome", "email": "novo@example.com", "password": "novasenha123", "role": "USER" }`
+- **Corpo da requisição:** 
+```json
+{ 
+  "name": "Novo Nome", 
+  "email": "novo@example.com", 
+  "password": "novasenha123", 
+  "role": "USER" 
+}
+```
 - **Descrição:** Atualiza um usuário existente.
 
 #### POST: /api/users/phone_numbers
-- **Corpo da requisição:** `{ "user_id": 1, "number": "123456789" }`
+- **Corpo da requisição:** 
+```json
+{ 
+  "user_id": 1, 
+  "number": "123456789" 
+}
+```
 - **Descrição:** Cadastra um número de telefone para um usuário.
 
 #### GET: /api/users/:user_id/phone_numbers
@@ -100,10 +128,13 @@ npm run dev
 - **Descrição:** Exclui um número de telefone pelo ID.
 
 #### PATCH: /api/users/phone_numbers/:id
-- **Corpo da requisição:** `{ "number": "987654321" }`
+- **Corpo da requisição:** 
+```json
+{ 
+  "number": "987654321" 
+}
+```
 - **Descrição:** Atualiza um número de telefone existente.
-
-Todas as informações devem ser enviadas no formato JSON no corpo da requisição.
 
 ### Melhorias Futuras
 - Criar documentação com Swagger.
