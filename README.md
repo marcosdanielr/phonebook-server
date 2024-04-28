@@ -42,29 +42,29 @@ Usuários administradores têm permissão para gerenciar listas de números de t
 
 ### Instalação e Configuração
 
-#### Clone o repositório:
+#### 1. Clone o repositório:
    ```bash
    git clone https://github.com/marcosdanielr/telephone-directory-server.git
    cd telephone-directory-server
 ```
 
 
-#### Instale as dependências:
+#### 2. Instale as dependências:
 ```bash
 npm install
 ```
 
-#### Certifique-se de ter o Docker instalado e execute:
+#### 3. Certifique-se de ter o Docker instalado e execute:
 ```bash
 docker compose up -d
 ```
 
-#### Aplique as migrações do Prisma:
+#### 4. Aplique as migrações do Prisma:
 ```bash
 npx prisma migrate dev
 ```
 
-#### Inicie o servidor:
+#### 5. Inicie a aplicação:
 ```bash
 npm run dev
 ```
