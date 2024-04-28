@@ -16,12 +16,6 @@ export const createUserValidator = vine.compile(
   })
 )
 
-export const userIdValidator = vine.compile(
-  vine.object({
-    id: vine.number().min(1),
-  })
-)
-
 export const updateUserValidator = vine.compile(
   vine.object({
     name: vine.string().maxLength(240).optional(),

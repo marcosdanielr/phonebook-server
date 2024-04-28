@@ -3,7 +3,6 @@ import { makeListUsersUseCase } from '#use_cases/factories/make_list_users_use_c
 import { ListUsersResponseCaseResponse } from '#use_cases/users/list_users_use_case'
 import {
   createUserValidator,
-  userIdValidator,
   listUsersValidator,
   updateUserValidator,
 } from '#validators/users_validator'
@@ -13,6 +12,7 @@ import { errors } from '@vinejs/vine'
 import { makeDeleteUserUseCase } from '#use_cases/factories/make_delete_user_use_case'
 import { UserNotFoundError } from '#use_cases/errors/user_not_found_error'
 import { makeUpdateUserUseCase } from '#use_cases/factories/make_update_user_use_case'
+import { idValidator } from '#validators/id_validator'
 
 export default class UsersController {
   async list({ request }: HttpContext): Promise<ListUsersResponseCaseResponse> {
@@ -62,7 +62,7 @@ export default class UsersController {
 
   async delete({ request, response }: HttpContext): Promise<void> {
     try {
-      const payload = await userIdValidator.validate(request.params())
+      const payload = await idValidator.validate(request.params())
 
       const { id } = payload
 
@@ -86,7 +86,7 @@ export default class UsersController {
 
   async update({ request, response }: HttpContext): Promise<void> {
     try {
-      const paramsPayload = await userIdValidator.validate(request.params())
+      const paramsPayload = await idValidator.validate(request.params())
       const bodyPayload = await updateUserValidator.validate(request.body())
 
       const { id } = paramsPayload
