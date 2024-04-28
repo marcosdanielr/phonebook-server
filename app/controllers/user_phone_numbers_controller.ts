@@ -46,7 +46,11 @@ export default class UserPhoneNumbersController {
 
   async list({ request, response }: HttpContext): Promise<ListUserPhoneNumbersResponse | unknown> {
     try {
-      const payload = await userIdValidator.validate(request.params)
+      const params = {
+        id: request.params().user_id,
+      }
+
+      const payload = await userIdValidator.validate(params)
 
       const userId = payload.id
 
