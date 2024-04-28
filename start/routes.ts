@@ -10,6 +10,7 @@
 const UsersController = () => import('#controllers/users_controller')
 const AuthenticationController = () => import('#controllers/authentication_controller')
 import router from '@adonisjs/core/services/router'
+import { middleware } from './kernel.js'
 
 router.post('api/auth', [AuthenticationController, 'authenticate'])
-router.get('api/users', [UsersController, 'list'])
+router.get('api/users', [UsersController, 'list']).use(middleware.auth())
