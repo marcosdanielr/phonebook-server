@@ -13,4 +13,6 @@ import router from '@adonisjs/core/services/router'
 import { middleware } from './kernel.js'
 
 router.post('api/auth', [AuthenticationController, 'authenticate'])
+
 router.get('api/users', [UsersController, 'list']).use(middleware.auth())
+router.post('api/users', [UsersController, 'create']).use(middleware.auth())
