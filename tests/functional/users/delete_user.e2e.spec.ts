@@ -13,7 +13,7 @@ test.group('Delete User (E2E)', () => {
       Authorization: `Bearer ${accessToken}`,
     })
 
-    const [, user] = getUsersResponse.body().users
+    const [, , user] = getUsersResponse.body().users
 
     const response = await client.delete(`/api/users/${user.id}`).headers({
       Authorization: `Bearer ${accessToken}`,
