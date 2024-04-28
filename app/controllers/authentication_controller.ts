@@ -71,7 +71,7 @@ export default class AuthenticationController {
     const getUserUseCase = makeGetUserUseCase()
 
     const user = await getUserUseCase.execute({
-      id: (payload as JwtPayload).id,
+      id: Number((payload as JwtPayload).sub),
     })
 
     return user
