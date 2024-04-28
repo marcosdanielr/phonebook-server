@@ -7,7 +7,7 @@ interface ListUserPhoneNumbersRequest {
   userId: number
 }
 
-interface ListUserPhoneNumbersResponse {
+export interface ListUserPhoneNumbersResponse {
   user_phone_numbers: UserPhoneNumber[]
 }
 
@@ -15,7 +15,7 @@ export class ListUserPhoneNumbersUseCase {
   constructor(
     private usersRepository: UsersRepository,
     private userNumberPhonesRepository: UserPhoneNumbersRepository
-  ) {}
+  ) { }
 
   async execute({ userId }: ListUserPhoneNumbersRequest): Promise<ListUserPhoneNumbersResponse> {
     const userExists = await this.usersRepository.findById(userId)
