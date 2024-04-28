@@ -16,8 +16,17 @@ export const createUserValidator = vine.compile(
   })
 )
 
-export const deleteUserValidator = vine.compile(
+export const userIdValidator = vine.compile(
   vine.object({
     id: vine.number().min(1),
+  })
+)
+
+export const updateUserValidator = vine.compile(
+  vine.object({
+    name: vine.string().maxLength(240).optional(),
+    email: vine.string().email().maxLength(254).optional(),
+    password: vine.string().minLength(8).optional(),
+    role: vine.enum($Enums.Role).optional(),
   })
 )
