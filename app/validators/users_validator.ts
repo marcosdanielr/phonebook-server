@@ -15,3 +15,9 @@ export const createUserValidator = vine.compile(
     role: vine.enum($Enums.Role),
   })
 )
+
+export const deleteUserValidator = vine.compile(
+  vine.object({
+    id: vine.number().min(1),
+  })
+)
