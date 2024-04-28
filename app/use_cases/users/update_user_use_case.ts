@@ -1,14 +1,21 @@
 import { UsersRepository } from '#repositories/users_repository'
 import { UserNotFoundError } from '#use_cases/errors/user_not_found_error'
-import { Prisma } from '@prisma/client'
+import { $Enums } from '@prisma/client'
+
+export interface UserUpdateInput {
+  name?: string
+  email?: string
+  password?: string
+  role?: $Enums.Role
+}
 
 interface UpdateUserUseCaseRequest {
   id: number
-  data: Prisma.UserUpdateInput
+  data: UserUpdateInput
 }
 
 export class UpdateUserUseCase {
-  constructor(private userRepository: UsersRepository) {}
+  constructor(private userRepository: UsersRepository) { }
 
   async execute({ id, data }: UpdateUserUseCaseRequest): Promise<void> {
     const userExists = await this.userRepository.findById(id)
@@ -17,6 +24,13 @@ export class UpdateUserUseCase {
       throw new UserNotFoundError()
     }
 
-    await this.userRepository.update(id, data)
+    const { name, email, password, role } = data
+
+    await this.userRepository.update(id, {
+      name,
+      email,
+      password_hash: password,
+      role,
+    })
   }
 }
