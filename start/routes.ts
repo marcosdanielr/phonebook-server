@@ -21,3 +21,4 @@ router.delete('api/users/:id', [UsersController, 'delete']).use(middleware.auth(
 router.patch('api/users/:id', [UsersController, 'update']).use(middleware.auth())
 
 router.post('/api/users/phone_numbers', [UserPhoneNumbersController, 'create'])
+router.get('/api/users/:user_id/phone_numbers', [UserPhoneNumbersController, 'list'])
