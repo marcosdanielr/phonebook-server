@@ -91,7 +91,6 @@ export default class UserPhoneNumbersController {
         id,
       })
     } catch (error) {
-      console.log(error)
       if (error instanceof PhoneNumberNotFoundError) {
         return response.notFound({
           message: error.message,
