@@ -1,4 +1,4 @@
-import { Prisma, User } from '@prisma/client'
+import { $Enums, Prisma, User } from '@prisma/client'
 import { UsersRepository } from '#repositories/users_repository'
 
 export class InMemoryUsersRepository implements UsersRepository {
@@ -9,7 +9,7 @@ export class InMemoryUsersRepository implements UsersRepository {
   }
 
   async create(data: Prisma.UserCreateInput) {
-    const { name, email, password_hash: passwordHash } = data
+    const { name, email, password_hash: passwordHash, role } = data
 
     let userId = 1
     if (this.users.length > 0) {
@@ -20,7 +20,7 @@ export class InMemoryUsersRepository implements UsersRepository {
       id: userId,
       name,
       email,
-      role: 'USER',
+      role: role || 'USER',
       password_hash: passwordHash,
     })
   }
@@ -69,7 +69,7 @@ export class InMemoryUsersRepository implements UsersRepository {
       name: (data.name as string) || name,
       email: (data.email as string) || email,
       password_hash: (data.password_hash as string) || passwordHash,
-      role,
+      role: (data.role as $Enums.Role) || role,
     }
 
     this.users[index] = {

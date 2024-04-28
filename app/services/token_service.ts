@@ -1,10 +1,11 @@
 import env from '#start/env'
+import { $Enums } from '@prisma/client'
 import jwt from 'jsonwebtoken'
 
 interface TokenPayload {
   sub: number
   name: string
-  role: string
+  role: $Enums.Role
 }
 
 export default class TokenService {

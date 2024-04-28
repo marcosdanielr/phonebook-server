@@ -13,13 +13,13 @@ export class PrismaUserRepository implements UsersRepository {
   }
 
   async create(data: Prisma.UserCreateInput) {
-    const { name, email, password_hash: passwordHash } = data
+    const { name, email, password_hash: passwordHash, role } = data
 
     await prisma.user.create({
       data: {
         email,
         name,
-        role: 'USER',
+        role: role || 'USER',
         password_hash: passwordHash,
       },
     })

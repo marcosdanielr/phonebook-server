@@ -15,9 +15,14 @@ export default class AuthMiddleware {
     const tokenJWT = tokenArray[1]
 
     try {
-      jwt.verify(tokenJWT, env.get('JWT_SECRET'))
-      const output = await next()
-      return output
+      const payload = jwt.verify(tokenJWT, env.get('JWT_SECRET'))
+
+      if (typeof payload !== 'string' && payload.role === 'ADMIN') {
+        const output = await next()
+        return output
+      }
+
+      return response.unauthorized()
     } catch (error) {
       return response.unauthorized()
     }

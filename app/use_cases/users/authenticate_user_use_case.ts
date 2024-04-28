@@ -13,12 +13,12 @@ interface AuthenticateUserResponse {
 }
 
 export class AuthenticateUserUseCase {
-  constructor(private usersRepository: UsersRepository) {}
+  constructor(private usersRepository: UsersRepository) { }
 
   async execute({ email, password }: AuthenticateUserRequest): Promise<AuthenticateUserResponse> {
     const user = await this.usersRepository.findByEmail(email)
 
-    if (!user) {
+    if (!user || user.role !== 'ADMIN') {
       throw new InvalidCredentialsError()
     }
 

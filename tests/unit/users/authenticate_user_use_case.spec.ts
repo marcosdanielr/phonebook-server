@@ -16,6 +16,7 @@ test.group('Authenticate User Use Case', (group) => {
       name: 'Marcos',
       email: 'marcos@test.com',
       password_hash: await hash.make('123456789'),
+      role: 'ADMIN',
     })
 
     return () => {
