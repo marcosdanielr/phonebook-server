@@ -1,5 +1,4 @@
-import { UsersRepository } from '#repositories/users_repository'
-import { User } from '@prisma/client'
+import { User, UsersRepository } from '#repositories/users_repository'
 
 export interface ListUsersRequestCaseRequest {
   page: number
@@ -10,7 +9,7 @@ export interface ListUsersResponseCaseResponse {
 }
 
 export class ListUsersUseCase {
-  constructor(private usersRepository: UsersRepository) {}
+  constructor(private usersRepository: UsersRepository) { }
 
   async execute({ page }: ListUsersRequestCaseRequest): Promise<ListUsersResponseCaseResponse> {
     const users = await this.usersRepository.list(page)

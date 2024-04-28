@@ -39,7 +39,6 @@ test.group('Delete User Use Case', (group) => {
     assert.include(users[1], {
       id: 2,
       name: 'Marcos',
-      password_hash: users[1].password_hash,
     })
   })
 

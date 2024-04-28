@@ -5,7 +5,9 @@ export class InMemoryUsersRepository implements UsersRepository {
   private users: User[] = []
 
   async list(page: number) {
-    return this.users.slice((page - 1) * 10, page * 10)
+    const users = this.users.map(({ password_hash, ...user }) => user)
+
+    return users.slice((page - 1) * 10, page * 10)
   }
 
   async create(data: Prisma.UserCreateInput) {
@@ -42,7 +44,14 @@ export class InMemoryUsersRepository implements UsersRepository {
       return null
     }
 
-    return user
+    const { id: userId, name, email, role } = user
+
+    return {
+      id: userId,
+      name,
+      email,
+      role,
+    }
   }
 
   async delete(id: number) {

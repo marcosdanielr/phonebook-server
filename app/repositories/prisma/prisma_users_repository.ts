@@ -7,6 +7,12 @@ export class PrismaUserRepository implements UsersRepository {
     const users = prisma.user.findMany({
       take: 10,
       skip: (page - 1) * 10,
+      select: {
+        id: true,
+        role: true,
+        name: true,
+        email: true,
+      },
     })
 
     return users
@@ -49,6 +55,12 @@ export class PrismaUserRepository implements UsersRepository {
     await prisma.user.delete({
       where: {
         id,
+      },
+      select: {
+        id: true,
+        name: true,
+        email: true,
+        role: true,
       },
     })
   }
