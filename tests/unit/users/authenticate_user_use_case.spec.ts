@@ -26,13 +26,12 @@ test.group('Authenticate User Use Case', (group) => {
   })
 
   test('should be able authenticate', async ({ assert }) => {
-    const { user } = await sut.execute({ email: 'marcos@test.com', password: '123456789' })
-
-    assert.include(user, {
-      id: 1,
-      name: 'Marcos',
+    const { access_token: accessToken } = await sut.execute({
       email: 'marcos@test.com',
+      password: '123456789',
     })
+
+    assert.isTrue(typeof accessToken === 'string')
   })
 
   test("shouldn't be able authenticate with invalid email", async ({ assert }) => {

@@ -1,7 +1,8 @@
 import { UsersRepository } from '#repositories/users_repository'
+import env from '#start/env'
 import { InvalidCredentialsError } from '#use_cases/errors/invalid_credentials_error'
 import hash from '@adonisjs/core/services/hash'
-import { User } from '@prisma/client'
+import jwt from 'jsonwebtoken'
 
 interface AuthenticateUserRequest {
   email: string
@@ -9,11 +10,11 @@ interface AuthenticateUserRequest {
 }
 
 interface AuthenticateUserResponse {
-  user: User
+  access_token: string
 }
 
 export class AuthenticateUserUseCase {
-  constructor(private usersRepository: UsersRepository) { }
+  constructor(private usersRepository: UsersRepository) {}
 
   async execute({ email, password }: AuthenticateUserRequest): Promise<AuthenticateUserResponse> {
     const user = await this.usersRepository.findByEmail(email)
@@ -28,8 +29,21 @@ export class AuthenticateUserUseCase {
       throw new InvalidCredentialsError()
     }
 
+    const ONE_WEEK = 1000 * 60 * 60 * 24 * 7
+
+    const payload = {
+      sub: user.id,
+      name: user.name,
+      email: user.email,
+      role: user.role,
+    }
+
+    const accessToken = jwt.sign(payload, env.get('JWT_SECRET'), {
+      expiresIn: ONE_WEEK,
+    })
+
     return {
-      user,
+      access_token: accessToken,
     }
   }
 }
