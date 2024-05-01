@@ -33,7 +33,7 @@ Usuários administradores têm permissão para gerenciar listas de números de t
 ### Diagramas do Banco de Dados
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/marcosdanielr/telephone-directory-server/d7e513467529aeda5f44183e950b741919efd60e/tmp/images/ERD.svg" alt="Diagrama do Banco de Dados" width="50%">
+  <img src="tmp/images/ERD.svg" alt="Diagrama do Banco de Dados" width="50%">
 </p>
 
 ### Requisitos
