@@ -12,6 +12,7 @@ export class PrismaUserRepository implements UsersRepository {
         role: true,
         name: true,
         email: true,
+        created_at: true,
       },
     })
 
@@ -51,6 +52,7 @@ export class PrismaUserRepository implements UsersRepository {
         name: true,
         role: true,
         email: true,
+        created_at: true,
       },
     })
 
@@ -67,6 +69,7 @@ export class PrismaUserRepository implements UsersRepository {
         name: true,
         email: true,
         role: true,
+        created_at: true,
       },
     })
   }

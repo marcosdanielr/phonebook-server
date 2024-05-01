@@ -19,11 +19,12 @@ enum Role {
 }
 
 model User {
-  id            Int    @id @unique @default(autoincrement())
-  name          String @db.VarChar(240)
-  email         String @unique @db.VarChar(254)
-  role          Role   @default(USER)
-  password_hash String @db.VarChar(240)
+  id            Int      @id @unique @default(autoincrement())
+  name          String   @db.VarChar(240)
+  email         String   @unique @db.VarChar(254)
+  role          Role     @default(USER)
+  password_hash String   @db.VarChar(240)
+  created_at    DateTime @default(now())
 
   user_phone_numbers UserPhoneNumber[]
 

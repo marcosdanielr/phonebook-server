@@ -5,6 +5,7 @@ export interface User {
   name: string
   email: string
   role: $Enums.Role
+  created_at: Date
 }
 
 export interface UsersRepository {

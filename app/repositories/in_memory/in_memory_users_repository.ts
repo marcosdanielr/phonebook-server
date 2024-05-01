@@ -24,6 +24,7 @@ export class InMemoryUsersRepository implements UsersRepository {
       email,
       role: role || 'USER',
       password_hash: passwordHash,
+      created_at: new Date(),
     })
   }
 
@@ -79,6 +80,7 @@ export class InMemoryUsersRepository implements UsersRepository {
       email: (data.email as string) || email,
       password_hash: (data.password_hash as string) || passwordHash,
       role: (data.role as $Enums.Role) || role,
+      created_at: this.users[index].created_at,
     }
 
     this.users[index] = {
