@@ -14,6 +14,9 @@ export class PrismaUserRepository implements UsersRepository {
         email: true,
         created_at: true,
       },
+      orderBy: {
+        created_at: 'desc',
+      },
     })
 
     return users
