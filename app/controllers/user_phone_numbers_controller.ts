@@ -5,7 +5,6 @@ import { makeCreateUserPhoneNumberUseCase } from '#use_cases/factories/make_crea
 import { makeDeleteUserPhoneNumberUseCase } from '#use_cases/factories/make_delete_user_phone_number_use_case'
 import { makeListUserPhoneNumbersUseCase } from '#use_cases/factories/make_list_user_phone_numbers_use_case'
 import { makeUpdateUserPhoneNumberUseCase } from '#use_cases/factories/make_update_user_phone_number_use_case'
-import { CreateUserPhoneNumberResponse } from '#use_cases/user_phone_numbers/create_user_phone_number_use_case'
 import { ListUserPhoneNumbersResponse } from '#use_cases/user_phone_numbers/list_user_phone_numbers_use_case'
 import { idValidator } from '#validators/id_validator'
 import {
@@ -66,7 +65,6 @@ export default class UserPhoneNumbersController {
       const userPhoneNumbers = await listUserPhoneNumbersUseCase.execute({
         userId,
       })
-
       return userPhoneNumbers
     } catch (error) {
       if (error instanceof UserNotFoundError) {
