@@ -64,7 +64,12 @@ docker compose up -d
 npx prisma migrate dev
 ```
 
-#### 5. Inicie a aplicação:
+#### 5. Configure o arquivo prisma/seed.js e suba-os:
+```bash
+npx prisma db seed
+```
+
+#### 6. Inicie a aplicação:
 ```bash
 npm run dev
 ```

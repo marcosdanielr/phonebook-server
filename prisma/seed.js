@@ -19,10 +19,11 @@ function generateRandomEmail() {
 
 async function main() {
   const users = []
-  for (let i = 0; i < 15; i++) {
+  for (let i = 0; i < 10; i++) {
     const user = {
       name: generateRandomString(8),
       email: generateRandomEmail(),
+      role: 'USER',
       password_hash: '$bcrypt$v=98$r=10$uyJ9uessj6iOa84jw325pQ$oUGob15jVdCZhT8djf70c0u4wCOiyS4',
     }
     users.push(user)
@@ -32,10 +33,10 @@ async function main() {
 
   await prisma.user.create({
     data: {
-      name: 'Marcos',
-      email: 'marcosadm@email.com',
+      name: 'Admin',
+      email: 'admin@email.com',
       role: 'ADMIN',
-      password_hash: '$bcrypt$v=98$r=10$uyJ9uessj6iOa84jw325pQ$oUGob15jVdCZhT8djf70c0u4wCOiyS4',
+      password_hash: '$bcrypt$v=98$r=10$J1jSASfygmc3eCgAJvWpcg$oAdIHE2GwNQ85a1eBFl85phLQR384zo',
     },
   })
 
