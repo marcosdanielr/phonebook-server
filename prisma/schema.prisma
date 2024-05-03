@@ -35,7 +35,7 @@ model UserPhoneNumber {
   id     Int    @id @unique @default(autoincrement())
   number String @unique @db.VarChar(11)
 
-  user User @relation(fields: [user_id], references: [id])
+  user User @relation(fields: [user_id], references: [id], onDelete: Cascade)
 
   user_id Int
 
