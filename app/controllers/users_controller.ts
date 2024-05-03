@@ -114,6 +114,12 @@ export default class UsersController {
         return response.badRequest(error)
       }
 
+      if (error instanceof UserAlreadyExistsError) {
+        return response.conflict({
+          message: error.message,
+        })
+      }
+
       return response.internalServerError()
     }
   }

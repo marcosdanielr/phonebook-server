@@ -2,6 +2,7 @@ import { UsersRepository } from '#repositories/users_repository'
 import { UserNotFoundError } from '#use_cases/errors/user_not_found_error'
 import { $Enums } from '@prisma/client'
 import hash from '@adonisjs/core/services/hash'
+import { UserAlreadyExistsError } from '#use_cases/errors/user_already_exists_error'
 
 export interface UserUpdateInput {
   name?: string
@@ -23,6 +24,14 @@ export class UpdateUserUseCase {
 
     if (!userExists) {
       throw new UserNotFoundError()
+    }
+
+    if (data.email && userExists.email !== data.email) {
+      const userWithSameEmailExists = await this.userRepository.findByEmail(data.email)
+
+      if (userWithSameEmailExists) {
+        throw new UserAlreadyExistsError()
+      }
     }
 
     const { name, email, password, role } = data
