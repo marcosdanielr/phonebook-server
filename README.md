@@ -65,8 +65,15 @@ npx prisma migrate dev
 ```
 
 #### 5. Configure o arquivo prisma/seed.js e suba-os:
+ Caso teste em ambiente de dev, pode deixar o JWT_SECRET em .env com o valor "any", e colocar este password_hash para algum usuário em prisma/seed.js ou cadastrar manualmente no banco de dados (```bash npx prisma studio```): "$bcrypt$v=98$r=10$uyJ9uessj6iOa84jw325pQ$oUGob15jVdCZhT8djf70c0u4wCOiyS4" (isto equivale a senha "123456789").
+ Precisa disso, pois apenas usuários administradores podem cadastrar no sistema:
+
 ```bash
 npx prisma db seed
+```
+Ou simplesmente em start/routes.ts, altere a linha 22 e cadastre o seu usuário na **role** **ADMIN** nesta rota:
+```ts
+router.post('api/users', [UsersController, 'create']).use(middleware.auth())
 ```
 
 #### 6. Inicie a aplicação:
