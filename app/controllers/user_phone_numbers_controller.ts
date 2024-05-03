@@ -3,9 +3,9 @@ import { PhoneNumberNotFoundError } from '#use_cases/errors/phone_number_not_fou
 import { UserNotFoundError } from '#use_cases/errors/user_not_found_error'
 import { makeCreateUserPhoneNumberUseCase } from '#use_cases/factories/make_create_user_phone_number_use_case'
 import { makeDeleteUserPhoneNumberUseCase } from '#use_cases/factories/make_delete_user_phone_number_use_case'
-import { makeDeleteUserUseCase } from '#use_cases/factories/make_delete_user_use_case'
 import { makeListUserPhoneNumbersUseCase } from '#use_cases/factories/make_list_user_phone_numbers_use_case'
 import { makeUpdateUserPhoneNumberUseCase } from '#use_cases/factories/make_update_user_phone_number_use_case'
+import { CreateUserPhoneNumberResponse } from '#use_cases/user_phone_numbers/create_user_phone_number_use_case'
 import { ListUserPhoneNumbersResponse } from '#use_cases/user_phone_numbers/list_user_phone_numbers_use_case'
 import { idValidator } from '#validators/id_validator'
 import {
@@ -24,12 +24,12 @@ export default class UserPhoneNumbersController {
     try {
       const createUserPhoneNumberUseCase = makeCreateUserPhoneNumberUseCase()
 
-      await createUserPhoneNumberUseCase.execute({
+      const userPhoneNumber = await createUserPhoneNumberUseCase.execute({
         userId,
         phoneNumber: number,
       })
 
-      return response.created()
+      return response.status(201).json(userPhoneNumber)
     } catch (error) {
       if (error instanceof UserNotFoundError) {
         return response.notFound({

@@ -4,7 +4,7 @@ import { Prisma } from '@prisma/client'
 
 export class PrismaUserPhoneNumbersRepository implements UserPhoneNumbersRepository {
   async create(userId: number, phoneNumber: string) {
-    await prisma.userPhoneNumber.create({
+    return await prisma.userPhoneNumber.create({
       data: {
         number: phoneNumber,
         user_id: userId,

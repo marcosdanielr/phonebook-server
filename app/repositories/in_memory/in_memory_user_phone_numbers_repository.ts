@@ -17,6 +17,8 @@ export class InMemoryUserPhoneNumbersRepository implements UserPhoneNumbersRepos
     }
 
     this.userPhoneNumbers.push(userPhoneNumber)
+
+    return userPhoneNumber
   }
 
   async findByNumber(phoneNumber: string) {
