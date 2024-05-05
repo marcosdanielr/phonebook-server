@@ -44,7 +44,7 @@ Usuários administradores têm permissão para gerenciar listas de números de t
 
 #### 1. Clone o repositório:
    ```bash
-   git clone https://github.com/marcosdanielr/telephone-directory-server.git
+   git clone https://github.com/marcosdanielr/phonebook-server.git
    cd telephone-directory-server
 ```
 
